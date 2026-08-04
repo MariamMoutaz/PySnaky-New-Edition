@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PySnaky — Learn Python, One Coil at a Time 🐍</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="custom-cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<canvas class="bg-canvas" id="bgCanvas"></canvas>
+
+<nav>
+  <div class="nav-content">
+    <div class="logo" onclick="showPage('home')">
+      <span class="logo-icon">🐍</span>
+      <span class="logo-text">PySnaky<span class="logo-caret">_</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><input type="radio" name="nav" id="nav-home" checked>
+        <label for="nav-home" onclick="showPage('home')"><span class="nav-tag">~/</span>home</label></li>
+      <li><input type="radio" name="nav" id="nav-lessons">
+        <label for="nav-lessons" onclick="showPage('lessons')"><span class="nav-tag">~/</span>lessons</label></li>
+      <li><input type="radio" name="nav" id="nav-quiz">
+        <label for="nav-quiz" onclick="showPage('quiz')"><span class="nav-tag">~/</span>quiz</label></li>
+      <li><input type="radio" name="nav" id="nav-about">
+        <label for="nav-about" onclick="showPage('about')"><span class="nav-tag">~/</span>about</label></li>
+    </ul>
+    <button class="reset-btn" onclick="resetProgress()" title="Reset progress">↺ reset</button>
+  </div>
+</nav>
+
+<aside class="snake-tracker" id="snakeTracker" aria-label="Lesson progress">
+  <div class="tracker-label">progress</div>
+  <div class="snake-body" id="snakeBody"></div>
+  <div class="tracker-count"><span id="doneCount">0</span>/<span id="totalCount">6</span></div>
+</aside>
+
+<div class="container">
+  <div id="page-content">
+
+    <!-- HOME -->
+    <section id="home-page" class="page">
+      <div class="hero">
+        <div class="terminal-window hero-terminal">
+          <div class="terminal-bar">
+            <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+            <span class="terminal-path">mariam@pysnaky: ~</span>
+          </div>
+          <div class="terminal-body">
+            <p class="type-line">$ python3 welcome.py</p>
+            <p class="type-line delay-1">Loading curriculum...</p>
+            <p class="type-line delay-2">&gt;&gt;&gt; import confidence</p>
+            <p class="type-line delay-3 accent">Ready. Let's write some Python.</p>
+            <span class="cursor-blink">▊</span>
+          </div>
+        </div>
+        <h1>Learn Python by <span class="hl">running</span> it,<br>not just reading about it.</h1>
+        <p class="hero-subtitle">Six short lessons. Real code you can execute in the browser. A quiz at the end of each one so you actually know it stuck.</p>
+        <button class="btn" onclick="showPage('lessons')">Start Lesson 1 →</button>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⌁</div>
+          <h3>Run code inline</h3>
+          <p>Every snippet has an in-browser simulator. Press run, see the output, no setup required.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">▤</div>
+          <h3>Six focused lessons</h3>
+          <p>Variables, strings, conditionals, loops, lists, and functions — the actual foundation, in order.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+          <h3>Quiz per lesson</h3>
+          <p>Short checks after each lesson. Your progress is saved in the snake tracker on the right.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LESSONS -->
+    <section id="lessons-page" class="page" style="display:none;">
+      <div class="lessons-shell">
+        <nav class="lesson-nav" id="lessonNav" aria-label="Lesson list"></nav>
+        <div class="lesson-panel" id="lessonPanel"></div>
+      </div>
+    </section>
+
+    <!-- QUIZ HUB -->
+    <section id="quiz-page" class="page" style="display:none;">
+      <div class="content-card">
+        <h2>Quiz Hub</h2>
+        <p class="lead">Each lesson has its own short quiz. Pick one below, or work through them in order.</p>
+        <div class="quiz-hub-grid" id="quizHubGrid"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about-page" class="page" style="display:none;">
+      <div class="content-card">
+        <h2>About PySnaky</h2>
+        <div class="mission-vision">
+          <div class="vision-card">
+            <h3>Why it exists</h3>
+            <p>Most "learn to code" sites make you read for ten minutes before you touch a keyboard. PySnaky flips that — short explanations, then code you run immediately, so the concept lands through your hands, not just your eyes.</p>
+          </div>
+          <div class="mission-card">
+            <h3>How it's built</h3>
+            <p>A lightweight in-browser Python simulator handles variables, arithmetic, strings, conditionals, loops, lists, and functions well enough to give real, correct output for every example on this site — no server, no install.</p>
+          </div>
+        </div>
+
+        <h3>About the developer</h3>
+        <p>I'm Mariam Moutaz, a Computer Science student at the Arab Open University with a focus on AI and software development. I like turning dense programming concepts into something you can poke at and break and learn from — this site is that idea applied to Python basics.</p>
+
+        <h3>Contact</h3>
+        <ul class="contact-list">
+          <li><span class="contact-icon">✉</span>Email: <a href="mailto:mariammoutazyahia@gmail.com">mariammoutazyahia@gmail.com</a></li>
+          <li><span class="contact-icon">☏</span>Phone: +201006015121</li>
+          <li><span class="contact-icon">⧉</span>LinkedIn: <a href="https://www.linkedin.com/in/mariam-moutaz-yahia" target="_blank" rel="noopener">Mariam Moutaz Yahia</a></li>
+          <li><span class="contact-icon">⌥</span>GitHub: <a href="https://github.com/MariamMoutaz" target="_blank" rel="noopener">github.com/MariamMoutaz</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="lessons-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
